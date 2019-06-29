@@ -1,0 +1,28 @@
+{% extends "_layouts/default.njk" %}
+
+{% block body %}
+
+  <div class="content">
+    <strong>Seus agendamentos</strong>
+    {% if appointments.length > 0 %}
+    <p>Esses são todos os agendamentos que você possui para hoje:</p>
+    {% else %}
+    <p>Você não possui nenhuma agendamento para hoje.</p>
+    {% endif %}
+
+    <ul class="providers">
+      {% for appointment in appointments %}
+        <li class="provider">
+          <div>
+            <img src="/files/{{ appointment.user.avatar }}" />
+            <strong>{{ appointment.user.name }} <br> Às {{ appointment.date | date("HH:mm") }}</strong>
+          </div>
+          <a class="logout" href="/app/schedule/destroy/{{ appointment.id }}" >Cancelar</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <a href="/app/dashboard" class="return">Voltar</a>
+  </div>
+
+{% endblock %}
